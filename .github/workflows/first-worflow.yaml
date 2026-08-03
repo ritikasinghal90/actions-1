@@ -11,11 +11,12 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v7
 
-      - name: Welcome message
-        run: echo "Welcome"
-
-      - name: List Files
-        run: ls -ltra
-
-      - name: Read File
-        run: cat README.md
+      - name: List And Read Files
+        run: |
+          echo "Welcome"
+          ls -ltra
+          cat README.md
+      
+      - name: ASCII Art Work
+        run: |
+          cowsay -f dragon "Run For Cover, I am Dragon..." > dragon.txt
