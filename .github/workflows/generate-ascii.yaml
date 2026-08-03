@@ -11,17 +11,22 @@ jobs:
       
       - name: Execute Cowsay Cmd
         run: cowsay -f dragon "Runfor your life.....I am DRAGON" > dragon.txt
-
-      - name: Sleep For 30 Sec
-        run: sleep 30
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ascii-artifact
+          path: dragon.txt
 
   test-job:
     runs-on: ubuntu-latest
     needs: [build-job]
     steps:
-      - name: Sleep For 10 Sec
-        run: sleep 10
-
+      - name: Download ASCII Artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ascii-artifact
+      
       - name: Test File Exists
         run: grep -i 'dragon' dragon.txt
 
@@ -29,6 +34,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test-job]
     steps:
+      - name: Download ASCII Artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ascii-artifact
+          
       - name: Read File
         run: cat dragon.txt
 
