@@ -14,4 +14,4 @@ jobs:
         run: ls -ltra
 
       - name: Executing Shell Script
-        run: ./ascci-art.sh
+        run: ./ascii-art.sh
